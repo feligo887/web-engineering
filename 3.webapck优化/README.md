@@ -22,7 +22,7 @@
 
 7. 打包缓存：[cache.allowCollectingMemory](https://www.webpackjs.com/configuration/cache/#cacheallowcollectingmemory '点击跳转')
 
-8. 分包：[webpack.DllPlugin](https://www.webpackjs.com/plugins/dll-plugin#dllplugin '点击跳转')
+8. js分包：[webpack.DllPlugin](https://www.webpackjs.com/plugins/dll-plugin#dllplugin '点击跳转')
 
 
 ## Tree-Shaking触发
