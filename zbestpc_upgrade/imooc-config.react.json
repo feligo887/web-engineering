@@ -1,0 +1,6 @@
+{
+  "plugins": [
+    "./plugins/imooc-build-react-plugin",
+    "./plugins/zbestpc-plugin.common.js"
+  ]
+}

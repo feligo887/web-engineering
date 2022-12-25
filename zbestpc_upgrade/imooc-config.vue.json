@@ -1,0 +1,6 @@
+{
+  "plugins": [
+    "imooc-build-vue-plugin",
+    "./plugins/zbestpc-plugin.common.js"
+  ]
+}
