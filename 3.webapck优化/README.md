@@ -16,13 +16,17 @@
 
 4. 图片压缩：[image-webpack-loader](https://github.com/tcoopman/image-webpack-loader#readme '点击跳转')
 
-5. 代码分割：[split-chunks-plugin](https://www.webpackjs.com/plugins/split-chunks-plugin#root '点击跳转')
+5. 分割图片：webapck5 [webapck.asset](https://webpack.docschina.org/guides/asset-modules/#root '点击跳转') webpack4 [url-loader](https://www.npmjs.com/package/url-loader '点击跳转')
 
-6. 多入口配置：[html-webpack-plugin](https://www.npmjs.com/package/html-webpack-plugin '点击跳转')
+6. 代码分割：[split-chunks-plugin](https://www.webpackjs.com/plugins/split-chunks-plugin#root '点击跳转')
 
-7. 打包缓存：[cache.allowCollectingMemory](https://www.webpackjs.com/configuration/cache/#cacheallowcollectingmemory '点击跳转')
+7. 多入口配置：[html-webpack-plugin](https://www.npmjs.com/package/html-webpack-plugin '点击跳转')
 
-8. js分包：[webpack.DllPlugin](https://www.webpackjs.com/plugins/dll-plugin#dllplugin '点击跳转')
+8. 打包缓存：webpack5 [webapck.cache](https://www.webpackjs.com/configuration/cache/#cacheallowcollectingmemory '点击跳转')、webpack4 [hard-source-webpack-plugin](https://www.npmjs.com/package/hard-source-webpack-plugin?activeTab=readme "点击跳转")代替
+
+9. js分包：[webpack.DllPlugin](https://www.webpackjs.com/plugins/dll-plugin#dllplugin '点击跳转')
+
+10. 多进程/多实例: [thread-loader](https://www.npmjs.com/package/thread-loader?activeTab=readme '点击跳转')或者[webpack.parallel](https://cli.vuejs.org/zh/config/#parallel '点击跳转')
 
 
 ## Tree-Shaking触发
