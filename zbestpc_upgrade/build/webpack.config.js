@@ -118,6 +118,9 @@ const config = {
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
       chunkFilename: 'css/[name].chunk.css',
+      minify: {
+        removeComments: true // 删除注释
+      }
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',

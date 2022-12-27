@@ -35,3 +35,107 @@ import module from 'https://imooc-dev.youbaobao.xyz/test/moduleA.js' ;
 console. log ('moduleA.js:', module.a + 2);
 ```
 5. 需高效的Treeshaking：webapck5 对文件引入副作用的处理 [webpack.sideEffects](https://webpack.docschina.org/guides/tree-shaking/#mark-the-file-as-side-effect-free])
+6. 模块联邦: [Module Federated](https://webpack.docschina.org/concepts/module-federation/ '点击跳转')
+
+```
+//  子应用-外部模块
+//  webpack.config.js
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+
+module.exports = {
+  mode: 'development',
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: '/dist',
+  },
+    devServer: {
+    port: 3000,
+    host: '127.0.0.1',
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'index.html'
+      filename: 'index.html',
+      minify: {
+        removeComments: true // 删除注释
+      }
+    }),
+    new ModuleFederationPlugin({
+        filaname:'module-child.js', //  要操作的目标文件(这里的文件是你自己打包后的文件名字)
+        name: 'app-child',
+        exposes: { // 对外暴漏的模块信息
+            app-module-child: './module-child.js'
+        },
+    })
+  ]
+}
+```
+
+```
+// 子应用-外部模块
+//module-child.js
+console.log(子应用运行中...);
+
+export default {
+    name: 'module-child'
+}
+```
+
+```
+//  主应用
+//  webpack.config.js
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+
+module.exports = {
+  mode: 'development',
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: '/dist',
+  },
+  devServer: {
+    port: 3001,
+    host: '127.0.0.1',
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'index.html'
+      filename: 'index.html',
+      minify: {
+        removeComments: true // 删除注释
+      }
+    }),
+    new ModuleFederationPlugin({
+        filaname:'module-main.js',
+        name: 'app-main',
+        remotes: { // 这里的名字是在主应用里，调用时候用的名字
+            app-main: 'app-main@http://127.0.0.1:3000/module-child.js'
+        },
+    })
+  ]
+}
+```
+
+```
+// 主应用
+// module-main.js
+console.log(主应用运行中...);
+import('app-main/app-module-child').then((res) => {
+const MeduleChild = res.default;
+console.log (MeduleChild);
+})
+```
+7. 支持全新的node.js生态特性[Package exports](https://webpack.docschina.org/guides/package-exports/#root '点击跳转')
+```
+// webpack5
+// package.json
+"exports": {
+    "require": "a.js"
+    "import": "b.js"
+}
+// 一个代码库可以同时倒出几种不同模块规则的的包，例如： require=common.js import= ESmodule，
+// 根据使用这的引用关键字会倒出不同规则模块的代码包
+```
